@@ -20,8 +20,12 @@ message.classList.add('messageStyle');
 
 let difficultyFactor = 0;  // Variable to track difficulty progression
 
-document.addEventListener('keydown', (e) => {
-    if (e.key == 'Enter' && game_state != 'Play') {
+// Handle key events for desktop and touch events for mobile
+document.addEventListener('keydown', controlBird);
+document.addEventListener('touchstart', controlBird); // Handle touch start for mobile
+
+function controlBird(e) {
+    if (e.key == 'Enter' && game_state != 'Play' || e.type == 'touchstart') {  // If 'Enter' or touch is detected
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
@@ -33,8 +37,11 @@ document.addEventListener('keydown', (e) => {
         score_val.innerHTML = '0';
         message.classList.remove('messageStyle');
         play();
+    } else if (game_state === 'Play' && (e.key == 'ArrowUp' || e.key == ' ' || e.type == 'touchstart')) {
+        img.src = 'images/Bird-2.png'; // Bird image when flying
+        bird_dy = -7.6; // Set vertical speed to simulate jump
     }
-});
+}
 
 function play() {
     function move() {
@@ -74,19 +81,10 @@ function play() {
     function apply_gravity() {
         if (game_state != 'Play') return;
         bird_dy = bird_dy + gravity;
-        document.addEventListener('keydown', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
-                img.src = 'images/Bird-2.png';
-                bird_dy = -7.6;
-            }
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
-                img.src = 'images/Bird.jpg'; // Updated to use Bird.jpg consistently
-            }
-        });
-
+        bird.style.top = bird_props.top + bird_dy + 'px';
+        bird_props = bird.getBoundingClientRect();
+        
+        // Check boundaries: if bird hits top or bottom
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
             game_state = 'End';
             message.style.left = '28vw';
@@ -94,8 +92,7 @@ function play() {
             message.classList.remove('messageStyle');
             return;
         }
-        bird.style.top = bird_props.top + bird_dy + 'px';
-        bird_props = bird.getBoundingClientRect();
+
         requestAnimationFrame(apply_gravity);
     }
     requestAnimationFrame(apply_gravity);
@@ -147,4 +144,3 @@ function box(width, height, x, y, color,) {
 }
 
 box(50, 100, getWidth() / 4, getHeight() / 4, "yellow");
-
