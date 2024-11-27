@@ -147,3 +147,4 @@ function box(width, height, x, y, color,) {
 }
 
 box(50, 100, getWidth() / 4, getHeight() / 4, "yellow");
+
