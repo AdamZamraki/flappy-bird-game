@@ -19,8 +19,7 @@ img.style.display = 'none';
 message.classList.add('messageStyle');
 
 document.addEventListener('keydown', (e) => {
-    
-    if(e.key == 'Enter' && game_state != 'Play'){
+    if (e.key == 'Enter' && game_state != 'Play') {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
@@ -35,28 +34,50 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function play(){
-    function move(){
-        if(game_state != 'Play') return;
+// Adding touch event to start game
+document.addEventListener('touchstart', () => {
+    if (game_state != 'Play') {
+        document.querySelectorAll('.pipe_sprite').forEach((e) => {
+            e.remove();
+        });
+        img.style.display = 'block';
+        bird.style.top = '40vh';
+        game_state = 'Play';
+        message.innerHTML = '';
+        score_title.innerHTML = 'Score : ';
+        score_val.innerHTML = '0';
+        message.classList.remove('messageStyle');
+        play();
+    }
+});
+
+function play() {
+    function move() {
+        if (game_state != 'Play') return;
 
         let pipe_sprite = document.querySelectorAll('.pipe_sprite');
         pipe_sprite.forEach((element) => {
             let pipe_sprite_props = element.getBoundingClientRect();
             bird_props = bird.getBoundingClientRect();
 
-            if(pipe_sprite_props.right <= 0){
+            if (pipe_sprite_props.right <= 0) {
                 element.remove();
-            }else{
-                if(bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width && bird_props.left + bird_props.width > pipe_sprite_props.left && bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height && bird_props.top + bird_props.height > pipe_sprite_props.top){
+            } else {
+                if (bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width &&
+                    bird_props.left + bird_props.width > pipe_sprite_props.left &&
+                    bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height &&
+                    bird_props.top + bird_props.height > pipe_sprite_props.top) {
                     game_state = 'End';
                     message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Press Enter To Restart';
                     message.classList.add('messageStyle');
                     img.style.display = 'none';
                     sound_die.play();
                     return;
-                }else{
-                    if(pipe_sprite_props.right < bird_props.left && pipe_sprite_props.right + move_speed >= bird_props.left && element.increase_score == '1'){
-                        score_val.innerHTML =+ score_val.innerHTML + 1;
+                } else {
+                    if (pipe_sprite_props.right < bird_props.left &&
+                        pipe_sprite_props.right + move_speed >= bird_props.left &&
+                        element.increase_score == '1') {
+                        score_val.innerHTML = +score_val.innerHTML + 1;
                         sound_point.play();
                     }
                     element.style.left = pipe_sprite_props.left - move_speed + 'px';
@@ -68,23 +89,29 @@ function play(){
     requestAnimationFrame(move);
 
     let bird_dy = 0;
-    function apply_gravity(){
-        if(game_state != 'Play') return;
+    function apply_gravity() {
+        if (game_state != 'Play') return;
         bird_dy = bird_dy + grativy;
         document.addEventListener('keydown', (e) => {
-            if(e.key == 'ArrowUp' || e.key == ' '){
+            if (e.key == 'ArrowUp' || e.key == ' ') {
                 img.src = 'images/Bird-2.png';
                 bird_dy = -7.6;
             }
         });
 
         document.addEventListener('keyup', (e) => {
-            if(e.key == 'ArrowUp' || e.key == ' '){
+            if (e.key == 'ArrowUp' || e.key == ' ') {
                 img.src = 'images/Bird.png';
             }
         });
 
-        if(bird_props.top <= 0 || bird_props.bottom >= background.bottom){
+        // Adding touch controls for mobile (swipe or tap)
+        document.addEventListener('touchstart', () => {
+            img.src = 'images/Bird-2.png';
+            bird_dy = -7.6;  // Make bird fly up on tap
+        });
+
+        if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
             game_state = 'End';
             message.style.left = '28vw';
             window.location.reload();
@@ -101,10 +128,10 @@ function play(){
 
     let pipe_gap = 35;
 
-    function create_pipe(){
-        if(game_state != 'Play') return;
+    function create_pipe() {
+        if (game_state != 'Play') return;
 
-        if(pipe_seperation > 115){
+        if (pipe_seperation > 115) {
             pipe_seperation = 0;
 
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
@@ -127,10 +154,3 @@ function play(){
     }
     requestAnimationFrame(create_pipe);
 }
-function box(width, height, x, y, color,) {
-    var rect = new Rectangle (width, height);
-    rect.setPosition(x, y);
-    rect.setColor(color);
-    add(rect);
-}
-box(50,100, getWidth()/4, getHeight()/4, "yellow");
