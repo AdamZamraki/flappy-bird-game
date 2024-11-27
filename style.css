@@ -1,83 +1,118 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
 .background {
-	height: 100vh;
-	width: 100vw;
-	background: url('images/background-img.png') no-repeat center center fixed;
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw;  /* Full width of the viewport */
+    background: url('images/background-img.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
+
 .bird {
-	height: 100px;
-	width: 130px;
-	position: fixed;
-	top: 40vh;
-	left: 30vw;
-	z-index: 100;
+    width: 18vw;  /* Scale based on the viewport width */
+    height: 15vh; /* Scale based on the viewport height */
+    position: fixed;
+    top: 40vh;    /* Centered vertically */
+    left: 30vw;   /* Centered horizontally */
+    z-index: 100;
 }
+
 .pipe_sprite {
-	position: fixed;
-	top: 40vh;
-	left: 100vw;
-	height: 70vh;
-	width: 6vw;
-	background:radial-gradient(lightgreen 50%, green);
-	border: 5px solid black;
+    position: fixed;
+    top: 40vh;
+    left: 100vw;  /* Initially off the screen */
+    height: 50vh; /* Adjust to fit smaller screens */
+    width: 15vw;  /* Adjust width based on the screen size */
+    background: radial-gradient(lightgreen 50%, green);
+    border: 5px solid black;
 }
+
 .message {
-	position: absolute;
-	z-index: 10;
-	color: black;
-	top: 30%;
-	left: 50%;
-	font-size: 4em;
-	transform: translate(-50%, -50%);
-	text-align: center;
+    position: absolute;
+    z-index: 10;
+    color: black;
+    top: 30%;
+    left: 50%;
+    font-size: 5vw; /* Font size adjusts with screen width */
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
-.messageStyle{
-	background: white;
-	padding: 30px;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-	border-radius: 5%;
+
+.messageStyle {
+    background: white;
+    padding: 5vw;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5%;
 }
+
 .score {
-	position: fixed;
-	z-index: 10;
-	height: 10vh;
-	font-size: 10vh;
-	font-weight: 100;
-	color: white;
-	-webkit-text-stroke-width: 2px;
+    position: fixed;
+    z-index: 10;
+    font-size: 8vw; /* Scales with screen size */
+    font-weight: 100;
+    color: white;
+    -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
-	top: 0;
-	left: 0;
-	margin: 10px;
-	font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    left: 0;
+    margin: 5vw;
 }
+
 .score_val {
-	color: gold;
-	font-weight: bold;
+    color: gold;
+    font-weight: bold;
 }
-@media only screen and (max-width: 1080px) {
-    .message{
-		font-size: 50px;
-		top: 50%;
-		white-space: nowrap;
-	}
-	.score{
-		font-size: 8vh;
-	}
-	.bird{
-		width: 120px;
-		height: 90px;
-	}
-	.pipe_sprite{
-		width: 14vw;
-	}
+
+/* For mobile devices (portrait or smaller screens) */
+@media only screen and (max-width: 768px) {
+    .bird {
+        width: 30vw;  /* Make the bird slightly bigger on small screens */
+        height: 20vh;  /* Height based on viewport height */
+    }
+
+    .pipe_sprite {
+        width: 20vw; /* Increase pipe width for small screens */
+        height: 50vh; /* Keep pipes proportional */
+    }
+
+    .message {
+        font-size: 6vw; /* Larger message text for small screens */
+        top: 35%;
+    }
+
+    .score {
+        font-size: 10vw; /* Adjust score size */
+    }
+
+    .background {
+        background-position: center center;
+    }
+}
+
+/* Additional tweaks for even smaller devices (like iPhone X, iPhone SE) */
+@media only screen and (max-width: 375px) {
+    .bird {
+        width: 35vw;  /* Bird gets a bit bigger on very small screens */
+        height: 25vh;  /* Proportional height */
+    }
+
+    .pipe_sprite {
+        width: 25vw; /* Make pipes larger to match smaller screens */
+        height: 50vh;
+    }
+
+    .score {
+        font-size: 12vw; /* Adjust score for small phones */
+    }
+
+    .message {
+        font-size: 7vw; /* Increase font size for message */
+    }
 }
