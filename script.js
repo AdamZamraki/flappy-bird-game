@@ -1,6 +1,5 @@
 let move_speed = 3, grativy = 0.5;
 let bird = document.querySelector('.bird');
-let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3');
 
@@ -15,18 +14,16 @@ let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
 
 let game_state = 'Start';
-img.style.display = 'none';
-message.classList.add('messageStyle');
+bird.src = 'images/Bird.jpg';  // Only use Bird.jpg for the bird image
 
-// Set bird to resting image by default
-img.src = 'images/Bird.jpg';  // Resting image
+message.classList.add('messageStyle');
 
 document.addEventListener('keydown', (e) => {
     if (e.key == 'Enter' && game_state != 'Play') {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
-        img.style.display = 'block';
+        bird.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
         message.innerHTML = '';
@@ -43,7 +40,7 @@ document.addEventListener('touchstart', () => {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
-        img.style.display = 'block';
+        bird.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
         message.innerHTML = '';
@@ -53,9 +50,7 @@ document.addEventListener('touchstart', () => {
         play();
     } else {
         // This part handles the bird's movement when tapped
-        // Make the bird fly upwards
-        bird_dy = -7.6;
-        img.src = 'images/Bird-2.png';  // Set to flying image when tapped
+        bird_dy = -7.6;  // Apply upward force to make the bird move
     }
 });
 
@@ -78,7 +73,7 @@ function play() {
                     game_state = 'End';
                     message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Press Enter To Restart';
                     message.classList.add('messageStyle');
-                    img.style.display = 'none';
+                    bird.style.display = 'none';
                     sound_die.play();
                     return;
                 } else {
@@ -104,16 +99,14 @@ function play() {
         // Handling keydown for keyboard
         document.addEventListener('keydown', (e) => {
             if (e.key == 'ArrowUp' || e.key == ' ') {
-                // Change bird image when the spacebar or arrow up is pressed (flying)
-                img.src = 'images/Bird-2.png';  // Switch to flying image
-                bird_dy = -7.6;
+                // Since we are using only one image, we don't need to switch images here.
+                bird_dy = -7.6; // Apply upward force
             }
         });
 
         // Applying touch event for mobile devices
         document.addEventListener('touchstart', () => {
-            // Make bird fly and show flying image on touch
-            img.src = 'images/Bird-2.png';  // Switch to flying image
+            // Make bird fly upwards on touch
             bird_dy = -7.6;
         });
 
