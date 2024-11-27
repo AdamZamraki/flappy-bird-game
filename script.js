@@ -48,6 +48,11 @@ document.addEventListener('touchstart', () => {
         score_val.innerHTML = '0';
         message.classList.remove('messageStyle');
         play();
+    } else {
+        // This part handles the bird's movement when tapped
+        // Make the bird fly upwards
+        bird_dy = -7.6;
+        img.src = 'images/Bird-2.png';  // Set to flying image when tapped
     }
 });
 
@@ -92,23 +97,21 @@ function play() {
     function apply_gravity() {
         if (game_state != 'Play') return;
         bird_dy = bird_dy + grativy;
+
+        // Handling keydown for keyboard
         document.addEventListener('keydown', (e) => {
             if (e.key == 'ArrowUp' || e.key == ' ') {
-                img.src = 'images/Bird-2.png';
+                // Change bird image when the spacebar or arrow up is pressed (flying)
+                img.src = 'images/Bird-2.png';  // Switch to flying image
                 bird_dy = -7.6;
             }
         });
 
-        document.addEventListener('keyup', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
-                img.src = 'images/Bird.png';
-            }
-        });
-
-        // Adding touch controls for mobile (swipe or tap)
+        // Applying touch event for mobile devices
         document.addEventListener('touchstart', () => {
-            img.src = 'images/Bird-2.png';
-            bird_dy = -7.6;  // Make bird fly up on tap
+            // Make bird fly and show flying image on touch
+            img.src = 'images/Bird-2.png';  // Switch to flying image
+            bird_dy = -7.6;
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -118,6 +121,7 @@ function play() {
             message.classList.remove('messageStyle');
             return;
         }
+
         bird.style.top = bird_props.top + bird_dy + 'px';
         bird_props = bird.getBoundingClientRect();
         requestAnimationFrame(apply_gravity);
