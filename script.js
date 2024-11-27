@@ -1,21 +1,23 @@
-let move_speed = 3, grativy = 0.5;
+let move_speed = 3, gravity = 0.5;
+let speedIncrement = 0.05; // Increment speed every 5 points scored
+let gravityIncrement = 0.02; // Increment gravity every 5 points scored
+
 let bird = document.querySelector('.bird');
+let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3');
 
 // getting bird element properties
 let bird_props = bird.getBoundingClientRect();
-
-// This method returns DOMReact -> top, right, bottom, left, x, y, width and height
 let background = document.querySelector('.background').getBoundingClientRect();
 
 let score_val = document.querySelector('.score_val');
 let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
+let score = 0; // Initialize score
 
 let game_state = 'Start';
-bird.src = 'images/Bird.jpg';  // Only use Bird.jpg for the bird image
-
+img.style.display = 'none';
 message.classList.add('messageStyle');
 
 document.addEventListener('keydown', (e) => {
@@ -23,7 +25,7 @@ document.addEventListener('keydown', (e) => {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
         });
-        bird.style.display = 'block';
+        img.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
         message.innerHTML = '';
@@ -34,25 +36,16 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Adding touch event to start game
-document.addEventListener('touchstart', () => {
-    if (game_state != 'Play') {
-        document.querySelectorAll('.pipe_sprite').forEach((e) => {
-            e.remove();
-        });
-        bird.style.display = 'block';
-        bird.style.top = '40vh';
-        game_state = 'Play';
-        message.innerHTML = '';
-        score_title.innerHTML = 'Score : ';
-        score_val.innerHTML = '0';
-        message.classList.remove('messageStyle');
-        play();
-    } else {
-        // This part handles the bird's movement when tapped
-        bird_dy = -7.6;  // Apply upward force to make the bird move
+function updateScore() {
+    score += 1;
+    score_val.innerHTML = score;
+
+    // Increase the difficulty
+    if (score % 5 === 0) {
+        move_speed += speedIncrement;  // Increase pipe speed
+        gravity += gravityIncrement;   // Increase gravity
     }
-});
+}
 
 function play() {
     function move() {
@@ -73,14 +66,14 @@ function play() {
                     game_state = 'End';
                     message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Press Enter To Restart';
                     message.classList.add('messageStyle');
-                    bird.style.display = 'none';
+                    img.style.display = 'none';
                     sound_die.play();
                     return;
                 } else {
                     if (pipe_sprite_props.right < bird_props.left &&
                         pipe_sprite_props.right + move_speed >= bird_props.left &&
                         element.increase_score == '1') {
-                        score_val.innerHTML = +score_val.innerHTML + 1;
+                        updateScore(); // Update score when passing a pipe
                         sound_point.play();
                     }
                     element.style.left = pipe_sprite_props.left - move_speed + 'px';
@@ -94,20 +87,18 @@ function play() {
     let bird_dy = 0;
     function apply_gravity() {
         if (game_state != 'Play') return;
-        bird_dy = bird_dy + grativy;
-
-        // Handling keydown for keyboard
+        bird_dy = bird_dy + gravity;
         document.addEventListener('keydown', (e) => {
             if (e.key == 'ArrowUp' || e.key == ' ') {
-                // Since we are using only one image, we don't need to switch images here.
-                bird_dy = -7.6; // Apply upward force
+                img.src = 'images/Bird-2.png'; // If you have this image for flying, else just keep the same
+                bird_dy = -7.6;
             }
         });
 
-        // Applying touch event for mobile devices
-        document.addEventListener('touchstart', () => {
-            // Make bird fly upwards on touch
-            bird_dy = -7.6;
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'ArrowUp' || e.key == ' ') {
+                img.src = 'images/Bird.jpg'; // Resting bird image
+            }
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -117,7 +108,6 @@ function play() {
             message.classList.remove('messageStyle');
             return;
         }
-
         bird.style.top = bird_props.top + bird_dy + 'px';
         bird_props = bird.getBoundingClientRect();
         requestAnimationFrame(apply_gravity);
@@ -125,7 +115,6 @@ function play() {
     requestAnimationFrame(apply_gravity);
 
     let pipe_seperation = 0;
-
     let pipe_gap = 35;
 
     function create_pipe() {
