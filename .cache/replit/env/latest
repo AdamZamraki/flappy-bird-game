@@ -1,0 +1,122 @@
+declare -gx REPLIT_BASHRC=/nix/store/vxzp0jk1x0l6w6v1xhq7fi9rrw2jf2zj-replit-bashrc/bashrc
+declare -gx REPLIT_PID1_FLAG_REPLIT_RTLD_LOADER=1
+declare -gx CONFIG_SHELL=/nix/store/bm7jr70d9ghn5cczb3q0w90apsm05p54-bash-5.1-p8/bin/bash
+declare -gx depsBuildTarget=''
+read -r _new_path <<< "/nix/store/12hy4z5yyfbnm5rpgvv9g452mvnhrg1i-mesa-21.2.6-drivers/lib:/nix/store/i4rmd8dk8xmpmblkl78pw8iim9byj6yi-libglvnd-1.3.4/lib:/nix/store/00iw8s3557npbh6xk0ahafs57r43mklj-pulseaudio-14.2/lib"
+#LD_LIBRARY_PATH=/nix/store/12hy4z5yyfbnm5rpgvv9g452mvnhrg1i-mesa-21.2.6-drivers/lib:/nix/store/i4rmd8dk8xmpmblkl78pw8iim9byj6yi-libglvnd-1.3.4/lib:/nix/store/00iw8s3557npbh6xk0ahafs57r43mklj-pulseaudio-14.2/lib
+if [ -e "/run/replit/env/last" ]; then read -r _last_path < <(\grep '^#LD_LIBRARY_PATH=' /run/replit/env/last | cut -f 2 -d =); fi
+_user_components="$(\tr : $'\n' <<< "${LD_LIBRARY_PATH:-}" |\grep -xv -f <(\tr : $'\n' <<< "${_last_path}") |\tr $'\n' :)"
+declare -gx LD_LIBRARY_PATH="${_user_components}${_new_path}"
+declare -gx DISPLAY=:0
+declare -gx __EGL_VENDOR_LIBRARY_FILENAMES=/nix/store/12hy4z5yyfbnm5rpgvv9g452mvnhrg1i-mesa-21.2.6-drivers/share/glvnd/egl_vendor.d/50_mesa.json
+declare -gx REPL_IDENTITY=v2.public.Q2lSak1tRmhOVEl4TWkwM1ltRXhMVFF6TXpJdE9HSXlNQzFsTVdSbE16bGpPV1ppTlRBU0IxcGhiWEpoYTJrYUMwWnNZWEJ3ZVMxQ2FYSmtJaVJqTW1GaE5USXhNaTAzWW1FeExUUXpNekl0T0dJeU1DMWxNV1JsTXpsak9XWmlOVEE0Z3Z1ckNGb1VDZ1Z6Y0c5amF4SUxhVzUwWlhKaFkzUnBkbVU97boYA5qM2fnP1OaHj_iFGVEDR8jvNryDVfmUEp6_aAxiw-sLtFEcMd4Cvcu40YSNtfcea46XjSg9Vb4cljy5Ag.R0FFaUJtTnZibTFoYmhLUkNIWXlMbkIxWW14cFl5NVJNbVF6VTFSa1VWWXlVakZhTVd4U1kyNU9NVlpZV2tKVFZrNUZVVmRyTTA1dVJsaE9hMHB2VVROU05rNVdUVFJSVjJoMlVUQmtRbFpYUmt0YU1qbHlWMWh3UzJGR2JGVldXR3hPVmtWc01GUnFTa3RoUlRGVVRVUkNUbVZyTVRWVVJsSnZZVlV4Y1ZGWVVtRldSVnB5VjJ4U1RrNVdiRFppUnpGYVlXeFdNMUl5WkhKVk1FbDRZMGRvYVZkRmNHOVpWRXB5V1ZWS1ZXRlZUWEpPYms1S1VqSmthbUZWU2xsVWJtUnBUV3MxZVZJeVkzZGpWVTE1WWtoV2ExSXhXalZYVm1SUFRVZEdXVmR0ZUVwaGJGcDVWRmRyTVdReVVsaFRiazVvVmpBeE1WbFdXbXBPVmxKWVZXeGthazFFVmtwVVYzUlRUVzFLUkUxV1NrMVhSVXBZVjJ0V2RtVldhM2xhUm5CVllXdHJlRmxyVm5OV1ZsWkdVMVJLVG1WdFVsTldSVnBEVTBaU2RGTnJWbE5WVkRBNWVtUk1XVXRKZFVOM2JqSTFlRU4yTFdaSU9VMWZWRFZ3Y25SUmRYVmlYMlZDWDNGVWNUaHVVams1UkdoMWVWbFRjbFJzTTFOcmVubDBVbXRIY3pCT1luQnFjbE5DTjNCYU1EQnFVRWRYYW5oblVVSm5RV2N1VWpCR1JtRlZTblJVYmxwcFlsUkdiMWx0YUUxWmEwWjFWMWhzVFdKclNYaFhWekUwWTBac05VNVdTazVpVmtreVZsUkdhMDFIVm5SVGJGcFVZbTVDVjFadE1UUlZNVkp5VlcxR1RsWnVRbGRWTW5SUFZrWmFXV0ZGVmxabGEwcHlWV3BCTVZOV1JuSlRiRnBPVW14d1UxWnRjRTlaVjFKWFlqTm9VMkpYYUZOV2FrcHZaRlpXV0dSSGRHbGlSVFZZV1d0V1QxWnRTbFZpUlZaV1lXdEtTRnBIZUhOV2JFcDFVbXhLVjFaWVFrcFdNbkJEWXpGa2MxSnNhR2hUUm5CVFZGVmtVMUV4V2tkYVJXUlNZbFZhU1ZkclZYaFZNREYwVld0MFYwMVdXbFJWVkVwS1pERlNjbUZHU2xkaE1YQjJWbFphYTJJeVNuTlVia3BwVTBWYVdGbHRkSGRVTVd4WFZXeGtUazFZUWtoWGExWXdZV3N4Y2xkc2JGZFNiV2hZVmtSR1lXUkhWa2xqUm1SWFlsWktTVlpHVWt0VU1rMTVVMnBhVm1GNmJGaFVWM2hMWWpGWmVVMVVVbFJOYTFwSFZGWldhMVpIU2taWGJGcGFWbnBGTUZkV1duTk9iRVpWVW0xd2FWSllRalpXUkVaWFdWZEZlVk5zYkZaV1JWcFhXV3RhWVdOc2NFaGxSVnBzVW01Q1JsWXlNWGRoUjBWNFkwYzVWMkZyV2xSVmVrWk9aVVphYzFOc1JsZFNSVW96VmpKMFlWZHRUblJqUlRGUVYwVTBlbHBGVmxwT1ZuQkZVbGhTYVdKVVZsRlVNR1JoVlcxS1dHRkVTbFJTVm5CNFZtdFdjbVJIVWtWaFJYQnBZbFp3VVZkRVNYaFdWVEYwV1hwU2FsZElRa1pWYTJSV1RrWmFSV0pHVW1oTlZrbzJWMjE0YjJKWFZuSmlla0pZVmxVeE5sZHRjM2RsYkdSV1RsaEtWRlpIVWxsWFYydDNUbFpLY2xWdE9VOWhWRVpNVkdwSk5WSkZlSE5UV0dSVFlURndiMVpzVm5kTlJscElUbGRHYUZZd2NGWlZiVEExVjIxS1dGVnFTbFpoYTNCUVZURmFUMlJXWkhSU2JFNVRaVzFuTUE9PQ
+declare -gx REPLIT_DOMAINS=c2aa5212-7ba1-4332-8b20-e1de39c9fb50-00-236afbkn1203a.spock.replit.dev
+declare -gx RANLIB=ranlib
+declare -gx CXX=g++
+declare -gx NIX_PATH=nixpkgs=/home/runner/.nix-defexpr/channels/nixpkgs-stable-21_11:/home/runner/.nix-defexpr/channels
+declare -gx USER=runner
+declare -gx REPLIT_PID1_FLAG_NIXMODULES_BEFORE_REPLIT_NIX=1
+declare -gx NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+declare -gx DIRENV_CONFIG=/etc/direnv
+declare -gx REPL_IMAGE=gcr.io/marine-cycle-160323/nix:bf8590a3e2f0a8b70b7ca175eeed9074dffbfca9
+declare -gx XDG_DATA_HOME=/home/runner/Flappy-Bird/.local/share
+declare -gx XDG_CACHE_HOME=/home/runner/Flappy-Bird/.cache
+declare -gx GIT_EDITOR=replit-git-editor
+declare -gx LD=ld
+declare -gx NIX_BUILD_CORES=1
+declare -gx NIX_ENFORCE_NO_NATIVE=1
+declare -gx configureFlags=''
+declare -gx depsBuildBuildPropagated=''
+declare -gx CC=gcc
+declare -gx AS=as
+declare -gx DENO_TLS_CA_STORE=system
+declare -gx REPLIT_SUBCLUSTER=interactive
+declare -gx REPL_PUBKEYS='{"crosis-ci":"7YlpcYh82oR9NSTtSYtR5jDL4onNzCGJGq6b+9CuZII=","crosis-ci:1":"7YlpcYh82oR9NSTtSYtR5jDL4onNzCGJGq6b+9CuZII=","crosis-ci:latest":"7YlpcYh82oR9NSTtSYtR5jDL4onNzCGJGq6b+9CuZII=","prod":"tGsjlu/BJvWTgvMaX7acuUb7AO1dXOrRiuk7y083RFE=","prod:1":"tGsjlu/BJvWTgvMaX7acuUb7AO1dXOrRiuk7y083RFE=","prod:2":"8uGN+vfszlnV93/HCSHlVLG0xddMlPkir1Ni4JKT4+w=","prod:3":"9+MCOSHQSQlcodXoot8dC8NLhc862nLkx1/VMsbY2h8=","prod:4":"8uGN+vfszlnV93/HCSHlVLG0xddMlPkir1Ni4JKT4+w=","prod:5":"9+MCOSHQSQlcodXoot8dC8NLhc862nLkx1/VMsbY2h8=","prod:latest":"tGsjlu/BJvWTgvMaX7acuUb7AO1dXOrRiuk7y083RFE=","vault-goval-token":"D5jJoMx1Ml54HM92NLgXl+MzptwDqbSsfyFG6f52g9E=","vault-goval-token:1":"D5jJoMx1Ml54HM92NLgXl+MzptwDqbSsfyFG6f52g9E=","vault-goval-token:latest":"D5jJoMx1Ml54HM92NLgXl+MzptwDqbSsfyFG6f52g9E="}'
+declare -gx REPL_OWNER_ID=17497474
+declare -gx REPLIT_RTLD_LOADER=1
+declare -gx NIX_PS1='\[\033[01;34m\]\w\[\033[00m\]\$ '
+declare -gx SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+declare -gx doCheck=''
+declare -gx READELF=readelf
+declare -gx REPL_OWNER=Zamraki
+declare -gx REPLIT_DEV_DOMAIN=c2aa5212-7ba1-4332-8b20-e1de39c9fb50-00-236afbkn1203a.spock.replit.dev
+declare -gx propagatedBuildInputs=''
+declare -gx depsTargetTargetPropagated=''
+declare -gx phases=nobuildPhase
+declare -gx REPLIT_LD_LIBRARY_PATH=/nix/store/mj9madzlh0xwcccb30qsnsclfjxr5k1s-vscode-langservers-extracted-3.0.1/lib:/nix/store/b2fkpfy1wq8na7kv3ldxxqpqsxyrpqdn-typescript-language-server-3.3.2/lib
+declare -gx NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu=1
+declare -gx out=/nix/store/2jgmy5r1vdcp6cfsfa6l7kjw6cs181c9-nix-shell
+declare -gx XDG_DATA_DIRS=/nix/store/bqmg7l0jn6nhgjlfc981g1imzb6ny8xl-patchelf-0.13/share
+declare -gx LANG=en_US.UTF-8
+declare -gx REPLIT_ENVIRONMENT=production
+declare -gx DOCKER_CONFIG=/home/runner/Flappy-Bird/.config/docker
+declare -gx REPL_IDENTITY_KEY=k2.secret.7WBs9EVrq67XkJjZShmHxG8PbCHgt8GT8FHnXkbJoQOJb0x1Ww0fYO-X5D6lV0nZyBg3bmUhM8HrftAs8Y1sMQ
+declare -gx AR=ar
+declare -gx nobuildPhase='echo
+echo "This derivation is not meant to be built, aborting";
+echo
+exit 1
+'
+declare -gx NIX_HARDENING_ENABLE='fortify stackprotector pic strictoverflow format relro bindnow'
+declare -gx NIX_LDFLAGS='-rpath /nix/store/2jgmy5r1vdcp6cfsfa6l7kjw6cs181c9-nix-shell/lib64 -rpath /nix/store/2jgmy5r1vdcp6cfsfa6l7kjw6cs181c9-nix-shell/lib '
+declare -gx depsTargetTarget=''
+declare -gx strictDeps=''
+declare -gx NIX_PROFILES='/nix/var/nix/profiles/default /home/runner/.nix-profile'
+declare -gx NIX_BUILD_TOP=/tmp
+declare -gx doInstallCheck=''
+declare -gx NIX_INDENT_MAKE=1
+declare -gx LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+declare -gx shell=/nix/store/bm7jr70d9ghn5cczb3q0w90apsm05p54-bash-5.1-p8/bin/bash
+declare -gx builder=/nix/store/bm7jr70d9ghn5cczb3q0w90apsm05p54-bash-5.1-p8/bin/bash
+declare -gx NIX_CFLAGS_COMPILE=' -frandom-seed=2jgmy5r1vd'
+declare -gx depsHostHostPropagated=''
+declare -gx REPLIT_CLI=/nix/store/v9a8mkg8s36s8iwj0wrsvjj3cd1lxn8n-pid1-0.0.1/bin/replit
+declare -gx REPLIT_NIX_CHANNEL=stable-21_11
+declare -gx REPLIT_CLUSTER=spock
+declare -gx REPLIT_DB_URL=https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE3MzI4NDkzODcsImlhdCI6MTczMjczNzc4NywiZGF0YWJhc2VfaWQiOiJjMmFhNTIxMi03YmExLTQzMzItOGIyMC1lMWRlMzljOWZiNTAifQ.Z08BdyP77dqG8EpAgYMZs3LFDEEkUTK32WAYV9-J_c3zAH3W3gJ5VF5cC6wcfM65DGfPH9kx1rZ69taR45BuPA
+declare -gx NIX_CC=/nix/store/2qwnn6lizc9d119kp3zig3q19gbfm4n6-gcc-wrapper-10.3.0
+declare -gx STRINGS=strings
+declare -gx REPL_LANGUAGE=html
+declare -gx REPL_SLUG=Flappy-Bird
+declare -gx propagatedNativeBuildInputs=''
+declare -gx __ETC_PROFILE_SOURCED=1
+declare -gx REPL_ID=c2aa5212-7ba1-4332-8b20-e1de39c9fb50
+declare -gx COLORTERM=truecolor
+declare -gx NIX_BINTOOLS=/nix/store/spm7d6ncyx2k5w8yl6clzynv2s4wf1kp-binutils-wrapper-2.35.2
+declare -gx HOST_PATH=/nix/store/mj9madzlh0xwcccb30qsnsclfjxr5k1s-vscode-langservers-extracted-3.0.1/bin:/nix/store/b2fkpfy1wq8na7kv3ldxxqpqsxyrpqdn-typescript-language-server-3.3.2/bin:/nix/store/jd1y449cf66yx5d1hwyjvc4562b1p1am-coreutils-9.0/bin:/nix/store/jjvw20r6pz3ff7pn91yhvfx8s7izsqan-findutils-4.8.0/bin:/nix/store/ndd6gh8zigjy0j68arj7nyrbcw4kcw01-diffutils-3.8/bin:/nix/store/bpg0ia8nkavzw7s66avi1f9nz72i1p3r-gnused-4.8/bin:/nix/store/df3ff57sbkgbdhc4ar19zs4y0hrhggii-gnugrep-3.7/bin:/nix/store/4fv981732jqzirah3h2y6ynmlsfbxb37-gawk-5.1.1/bin:/nix/store/k5ifa08z0qlkknnb8s1bdh2kdrx0qmd0-gnutar-1.34/bin:/nix/store/dcird3wn9xywy49w3qq1hpjwvjfn3lph-gzip-1.11/bin:/nix/store/s85iyc3p9nbinwvwx9rcqirf1m68zpmm-bzip2-1.0.6.0.2-bin/bin:/nix/store/msncxcf5lgy5by9cqjyxchxd26x47d64-gnumake-4.3/bin:/nix/store/bm7jr70d9ghn5cczb3q0w90apsm05p54-bash-5.1-p8/bin:/nix/store/gi3psbgxbf2fmvgi36pmw77nnh58vq3l-patch-2.7.6/bin:/nix/store/sqb20f4rk80lw21j4is85qwljlphmn3g-xz-5.2.5-bin/bin
+declare -gx NM=nm
+declare -gx NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu=1
+declare -gx REPLIT_RIPPKGS_INDICES=/nix/store/73awzgwmrga8y0dl84cp30h40965wyk5-rippkgs-indices
+declare -gx patches=''
+declare -gx outputs=out
+declare -gx HOSTNAME=5237702cf9b4
+declare -gx GIT_ASKPASS=replit-git-askpass
+declare -gx SIZE=size
+declare -gx shellHook=''
+read -r _new_path <<< "/nix/store/bccsypsvjskpzsgzww8bzjgqmck4bjbf-bash-interactive-5.1-p8/bin:/nix/store/bqmg7l0jn6nhgjlfc981g1imzb6ny8xl-patchelf-0.13/bin:/nix/store/2qwnn6lizc9d119kp3zig3q19gbfm4n6-gcc-wrapper-10.3.0/bin:/nix/store/6r5h4h7nqx73m87j5b9sjwy2x9kyri0k-gcc-10.3.0/bin:/nix/store/csz8v8xi2f644j26n84i20dnqmq43sih-glibc-2.33-117-bin/bin:/nix/store/jd1y449cf66yx5d1hwyjvc4562b1p1am-coreutils-9.0/bin:/nix/store/spm7d6ncyx2k5w8yl6clzynv2s4wf1kp-binutils-wrapper-2.35.2/bin:/nix/store/h19zwlkrp6b0hp3ypbqdcggnyarn3af6-binutils-2.35.2/bin:/nix/store/mj9madzlh0xwcccb30qsnsclfjxr5k1s-vscode-langservers-extracted-3.0.1/bin:/nix/store/b2fkpfy1wq8na7kv3ldxxqpqsxyrpqdn-typescript-language-server-3.3.2/bin:/nix/store/jjvw20r6pz3ff7pn91yhvfx8s7izsqan-findutils-4.8.0/bin:/nix/store/ndd6gh8zigjy0j68arj7nyrbcw4kcw01-diffutils-3.8/bin:/nix/store/bpg0ia8nkavzw7s66avi1f9nz72i1p3r-gnused-4.8/bin:/nix/store/df3ff57sbkgbdhc4ar19zs4y0hrhggii-gnugrep-3.7/bin:/nix/store/4fv981732jqzirah3h2y6ynmlsfbxb37-gawk-5.1.1/bin:/nix/store/k5ifa08z0qlkknnb8s1bdh2kdrx0qmd0-gnutar-1.34/bin:/nix/store/dcird3wn9xywy49w3qq1hpjwvjfn3lph-gzip-1.11/bin:/nix/store/s85iyc3p9nbinwvwx9rcqirf1m68zpmm-bzip2-1.0.6.0.2-bin/bin:/nix/store/msncxcf5lgy5by9cqjyxchxd26x47d64-gnumake-4.3/bin:/nix/store/bm7jr70d9ghn5cczb3q0w90apsm05p54-bash-5.1-p8/bin:/nix/store/gi3psbgxbf2fmvgi36pmw77nnh58vq3l-patch-2.7.6/bin:/nix/store/sqb20f4rk80lw21j4is85qwljlphmn3g-xz-5.2.5-bin/bin:/nix/store/a22sb3q74603nbjwql9lj76vj4x52ygh-pid1/bin:/nix/store/7ihnnj0al529c07bvzwad3h4sr40bj8m-replit-runtime-path/bin:/home/runner/.nix-profile/bin:/home/runner/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+#PATH=/nix/store/bccsypsvjskpzsgzww8bzjgqmck4bjbf-bash-interactive-5.1-p8/bin:/nix/store/bqmg7l0jn6nhgjlfc981g1imzb6ny8xl-patchelf-0.13/bin:/nix/store/2qwnn6lizc9d119kp3zig3q19gbfm4n6-gcc-wrapper-10.3.0/bin:/nix/store/6r5h4h7nqx73m87j5b9sjwy2x9kyri0k-gcc-10.3.0/bin:/nix/store/csz8v8xi2f644j26n84i20dnqmq43sih-glibc-2.33-117-bin/bin:/nix/store/jd1y449cf66yx5d1hwyjvc4562b1p1am-coreutils-9.0/bin:/nix/store/spm7d6ncyx2k5w8yl6clzynv2s4wf1kp-binutils-wrapper-2.35.2/bin:/nix/store/h19zwlkrp6b0hp3ypbqdcggnyarn3af6-binutils-2.35.2/bin:/nix/store/mj9madzlh0xwcccb30qsnsclfjxr5k1s-vscode-langservers-extracted-3.0.1/bin:/nix/store/b2fkpfy1wq8na7kv3ldxxqpqsxyrpqdn-typescript-language-server-3.3.2/bin:/nix/store/jjvw20r6pz3ff7pn91yhvfx8s7izsqan-findutils-4.8.0/bin:/nix/store/ndd6gh8zigjy0j68arj7nyrbcw4kcw01-diffutils-3.8/bin:/nix/store/bpg0ia8nkavzw7s66avi1f9nz72i1p3r-gnused-4.8/bin:/nix/store/df3ff57sbkgbdhc4ar19zs4y0hrhggii-gnugrep-3.7/bin:/nix/store/4fv981732jqzirah3h2y6ynmlsfbxb37-gawk-5.1.1/bin:/nix/store/k5ifa08z0qlkknnb8s1bdh2kdrx0qmd0-gnutar-1.34/bin:/nix/store/dcird3wn9xywy49w3qq1hpjwvjfn3lph-gzip-1.11/bin:/nix/store/s85iyc3p9nbinwvwx9rcqirf1m68zpmm-bzip2-1.0.6.0.2-bin/bin:/nix/store/msncxcf5lgy5by9cqjyxchxd26x47d64-gnumake-4.3/bin:/nix/store/bm7jr70d9ghn5cczb3q0w90apsm05p54-bash-5.1-p8/bin:/nix/store/gi3psbgxbf2fmvgi36pmw77nnh58vq3l-patch-2.7.6/bin:/nix/store/sqb20f4rk80lw21j4is85qwljlphmn3g-xz-5.2.5-bin/bin:/nix/store/a22sb3q74603nbjwql9lj76vj4x52ygh-pid1/bin:/nix/store/7ihnnj0al529c07bvzwad3h4sr40bj8m-replit-runtime-path/bin:/home/runner/.nix-profile/bin:/home/runner/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+if [ -e "/run/replit/env/last" ]; then read -r _last_path < <(\grep '^#PATH=' /run/replit/env/last | cut -f 2 -d =); fi
+_user_components="$(\tr : $'\n' <<< "${PATH:-}" |\grep -xv -f <(\tr : $'\n' <<< "${_last_path}") |\tr $'\n' :)"
+declare -gx PATH="${_user_components}${_new_path}"
+declare -gx depsBuildBuild=''
+declare -gx REPLIT_PID1_VERSION=0.0.0-5f507ff
+declare -gx REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+declare -gx buildInputs='/nix/store/mj9madzlh0xwcccb30qsnsclfjxr5k1s-vscode-langservers-extracted-3.0.1 /nix/store/b2fkpfy1wq8na7kv3ldxxqpqsxyrpqdn-typescript-language-server-3.3.2'
+declare -gx XDG_CONFIG_HOME=/home/runner/Flappy-Bird/.config
+declare -gx SOURCE_DATE_EPOCH=315532800
+declare -gx NIXPKGS_ALLOW_UNFREE=1
+declare -gx HOME=/home/runner
+declare -gx NIX_STORE=/nix/store
+declare -gx OBJDUMP=objdump
+declare -gx REPLIT_LD_AUDIT=/nix/store/n5x1kgbz8zjh63ymsijbislyi1n1hir6-replit_rtld_loader-1/rtld_loader.so
+declare -gx LIBGL_DRIVERS_PATH=/nix/store/12hy4z5yyfbnm5rpgvv9g452mvnhrg1i-mesa-21.2.6-drivers/lib/dri
+declare -gx PROMPT_DIRTRIM=2
+declare -gx nativeBuildInputs=''
+declare -gx OBJCOPY=objcopy
+declare -gx stdenv=/nix/store/z7wz8q1i0j4jmfpn87wpakwma6q0k90n-stdenv-linux
+declare -gx depsHostHost=''
+declare -gx _=/nix/store/jd1y449cf66yx5d1hwyjvc4562b1p1am-coreutils-9.0/bin/env
+declare -gx depsBuildTargetPropagated=''
+declare -gx REPL_HOME=/home/runner/Flappy-Bird
+declare -gx STRIP=strip
+declare -gx system=x86_64-linux
