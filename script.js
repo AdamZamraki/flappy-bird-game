@@ -18,6 +18,9 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
+// Set bird to resting image by default
+img.src = 'images/Bird.jpg';  // Resting image
+
 document.addEventListener('keydown', (e) => {
     if (e.key == 'Enter' && game_state != 'Play') {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
